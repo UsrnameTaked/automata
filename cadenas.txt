@@ -1,0 +1,9 @@
+programa s1{
+int a1;
+int b2;
+int c3;
+a1=8;
+b2=9;
+c3=a1+b2;
+print(c3);
+}

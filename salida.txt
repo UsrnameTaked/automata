@@ -1,0 +1,93 @@
+Pila(X)                        Entrada(a) W$                                                                    M[A,a]                         Acción                        
+$S                             programa s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                 M[S,programa]                 Comp: C                       
+$C                             programa s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                 M[C,programa]                 Comp: programa I{DDDAAOP}     
+$}POAADDD{I programa           programa s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                 M[programa,programa]          igual                         
+$}POAADDD{I                     s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                         M[ , ]                        igual                         
+$}POAADDD{I                    s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                          M[I,s1]                       Comp: LN                      
+$}POAADDD{NL                   s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                          M[L,s]                        Comp: s                       
+$}POAADDD{Ns                   s1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                          M[s,s]                        igual                         
+$}POAADDD{N                    1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                           M[N,1]                        Comp: 1                       
+$}POAADDD{1                    1{int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                           M[1,1]                        igual                         
+$}POAADDD{                     {int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                            M[{,{]                        igual                         
+$}POAADDD                      int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                             M[D,int]                      Comp: T I;                    
+$}POAADD;I T                   int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                             M[T,int]                      Comp: int                     
+$}POAADD;I int                 int a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                             M[int,int]                    igual                         
+$}POAADD;I                      a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                M[ , ]                        igual                         
+$}POAADD;I                     a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                 M[I,a1]                       Comp: LN                      
+$}POAADD;NL                    a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                 M[L,a]                        Comp: a                       
+$}POAADD;Na                    a1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                 M[a,a]                        igual                         
+$}POAADD;N                     1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                  M[N,1]                        Comp: 1                       
+$}POAADD;1                     1;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                  M[1,1]                        igual                         
+$}POAADD;                      ;int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                   M[;,;]                        igual                         
+$}POAADD                       int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                    M[D,int]                      Comp: T I;                    
+$}POAAD;I T                    int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                    M[T,int]                      Comp: int                     
+$}POAAD;I int                  int b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                    M[int,int]                    igual                         
+$}POAAD;I                       b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                       M[ , ]                        igual                         
+$}POAAD;I                      b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                        M[I,b2]                       Comp: LN                      
+$}POAAD;NL                     b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                        M[L,b]                        Comp: b                       
+$}POAAD;Nb                     b2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                        M[b,b]                        igual                         
+$}POAAD;N                      2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                         M[N,2]                        Comp: 2                       
+$}POAAD;2                      2;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                         M[2,2]                        igual                         
+$}POAAD;                       ;int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                          M[;,;]                        igual                         
+$}POAAD                        int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                           M[D,int]                      Comp: T I;                    
+$}POAA;I T                     int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                           M[T,int]                      Comp: int                     
+$}POAA;I int                   int c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                           M[int,int]                    igual                         
+$}POAA;I                        c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                              M[ , ]                        igual                         
+$}POAA;I                       c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                               M[I,c3]                       Comp: LN                      
+$}POAA;NL                      c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                               M[L,c]                        Comp: c                       
+$}POAA;Nc                      c3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                               M[c,c]                        igual                         
+$}POAA;N                       3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                                M[N,3]                        Comp: 3                       
+$}POAA;3                       3;a1=8;b2=9;c3=a1+b2;print(c3);}$                                                M[3,3]                        igual                         
+$}POAA;                        ;a1=8;b2=9;c3=a1+b2;print(c3);}$                                                 M[;,;]                        igual                         
+$}POAA                         a1=8;b2=9;c3=a1+b2;print(c3);}$                                                  M[A,a1]                       Comp: I=N;                    
+$}POA;N=I                      a1=8;b2=9;c3=a1+b2;print(c3);}$                                                  M[I,a]                        Comp: LN                      
+$}POA;N=NL                     a1=8;b2=9;c3=a1+b2;print(c3);}$                                                  M[L,a]                        Comp: a                       
+$}POA;N=Na                     a1=8;b2=9;c3=a1+b2;print(c3);}$                                                  M[a,a]                        igual                         
+$}POA;N=N                      1=8;b2=9;c3=a1+b2;print(c3);}$                                                   M[N,1]                        Comp: 1                       
+$}POA;N=1                      1=8;b2=9;c3=a1+b2;print(c3);}$                                                   M[1,1]                        igual                         
+$}POA;N=                       =8;b2=9;c3=a1+b2;print(c3);}$                                                    M[=,=]                        igual                         
+$}POA;N                        8;b2=9;c3=a1+b2;print(c3);}$                                                     M[N,8]                        Comp: 8                       
+$}POA;8                        8;b2=9;c3=a1+b2;print(c3);}$                                                     M[8,8]                        igual                         
+$}POA;                         ;b2=9;c3=a1+b2;print(c3);}$                                                      M[;,;]                        igual                         
+$}POA                          b2=9;c3=a1+b2;print(c3);}$                                                       M[A,b2]                       Comp: I=N;                    
+$}PO;N=I                       b2=9;c3=a1+b2;print(c3);}$                                                       M[I,b]                        Comp: LN                      
+$}PO;N=NL                      b2=9;c3=a1+b2;print(c3);}$                                                       M[L,b]                        Comp: b                       
+$}PO;N=Nb                      b2=9;c3=a1+b2;print(c3);}$                                                       M[b,b]                        igual                         
+$}PO;N=N                       2=9;c3=a1+b2;print(c3);}$                                                        M[N,2]                        Comp: 2                       
+$}PO;N=2                       2=9;c3=a1+b2;print(c3);}$                                                        M[2,2]                        igual                         
+$}PO;N=                        =9;c3=a1+b2;print(c3);}$                                                         M[=,=]                        igual                         
+$}PO;N                         9;c3=a1+b2;print(c3);}$                                                          M[N,9]                        Comp: 9                       
+$}PO;9                         9;c3=a1+b2;print(c3);}$                                                          M[9,9]                        igual                         
+$}PO;                          ;c3=a1+b2;print(c3);}$                                                           M[;,;]                        igual                         
+$}PO                           c3=a1+b2;print(c3);}$                                                            M[O,c3]                       Comp: I=IMI;                  
+$}P;IMI=I                      c3=a1+b2;print(c3);}$                                                            M[I,c]                        Comp: LN                      
+$}P;IMI=NL                     c3=a1+b2;print(c3);}$                                                            M[L,c]                        Comp: c                       
+$}P;IMI=Nc                     c3=a1+b2;print(c3);}$                                                            M[c,c]                        igual                         
+$}P;IMI=N                      3=a1+b2;print(c3);}$                                                             M[N,3]                        Comp: 3                       
+$}P;IMI=3                      3=a1+b2;print(c3);}$                                                             M[3,3]                        igual                         
+$}P;IMI=                       =a1+b2;print(c3);}$                                                              M[=,=]                        igual                         
+$}P;IMI                        a1+b2;print(c3);}$                                                               M[I,a1]                       Comp: LN                      
+$}P;IMNL                       a1+b2;print(c3);}$                                                               M[L,a]                        Comp: a                       
+$}P;IMNa                       a1+b2;print(c3);}$                                                               M[a,a]                        igual                         
+$}P;IMN                        1+b2;print(c3);}$                                                                M[N,1]                        Comp: 1                       
+$}P;IM1                        1+b2;print(c3);}$                                                                M[1,1]                        igual                         
+$}P;IM                         +b2;print(c3);}$                                                                 M[M,+]                        Comp: +                       
+$}P;I+                         +b2;print(c3);}$                                                                 M[+,+]                        igual                         
+$}P;I                          b2;print(c3);}$                                                                  M[I,b2]                       Comp: LN                      
+$}P;NL                         b2;print(c3);}$                                                                  M[L,b]                        Comp: b                       
+$}P;Nb                         b2;print(c3);}$                                                                  M[b,b]                        igual                         
+$}P;N                          2;print(c3);}$                                                                   M[N,2]                        Comp: 2                       
+$}P;2                          2;print(c3);}$                                                                   M[2,2]                        igual                         
+$}P;                           ;print(c3);}$                                                                    M[;,;]                        igual                         
+$}P                            print(c3);}$                                                                     M[P,print]                    Comp: print(I);               
+$};)I(print                    print(c3);}$                                                                     M[print,print]                igual                         
+$};)I(                         (c3);}$                                                                          M[(,(]                        igual                         
+$};)I                          c3);}$                                                                           M[I,c3]                       Comp: LN                      
+$};)NL                         c3);}$                                                                           M[L,c]                        Comp: c                       
+$};)Nc                         c3);}$                                                                           M[c,c]                        igual                         
+$};)N                          3);}$                                                                            M[N,3]                        Comp: 3                       
+$};)3                          3);}$                                                                            M[3,3]                        igual                         
+$};)                           );}$                                                                             M[),)]                        igual                         
+$};                            ;}$                                                                              M[;,;]                        igual                         
+$}                             }$                                                                               M[},}]                        igual                         
+$                              $                                                                                M[$,$]                        igual                         
