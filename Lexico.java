@@ -1,6 +1,9 @@
 /*import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;*/
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +67,7 @@ public class Lexico {
         }
         linea ++;
         encontrarDA(cadena, simbolos);
+
         if (e) {
             System.out.println("Cadena no válida");
             return null;
@@ -138,7 +142,7 @@ public class Lexico {
         return tokens;
     }
 
-   /*public static void main(String args[]){
+   public static void main(String args[]){
          try (BufferedReader br = new BufferedReader(new FileReader("cadenas.txt"))) {//lee el archivo
             Lexico l = new Lexico();//crea un objeto del analizador lexico
     
@@ -151,7 +155,7 @@ public class Lexico {
         } catch (IOException e) {
             e.printStackTrace();
         }       
-    }*/
+    }
     
 
 }

@@ -3,6 +3,9 @@ import java.util.ArrayList;
 public class Arbol{
     private String cadena;
     private ArrayList<Nodo> nodos;
+    public final String Sep = "[{};()=\\+\\-\\* ]";
+
+
     Nodo raiz;
     public Arbol(String cadena){
         nodos = new ArrayList<Nodo>();
@@ -12,11 +15,15 @@ public class Arbol{
     }
 
     private ArrayList<Nodo> nodos(String cadena){
+        System.out.println("Operandos");
         ArrayList<Nodo> nodos = new ArrayList<Nodo>();
-        char[] caracteres = cadena.toCharArray();
-        for (char c : caracteres) {
-            nodos.add(new Nodo(c+""));
+
+        String[] operandos = cadena.split("(?<=["+Sep+"])|(?=["+Sep+"])");
+        for (String o : operandos) {
+            System.out.println(o);
+            nodos.add(new Nodo(o));
         }
+        System.out.println("Operandos");
         return nodos;
     }
 
@@ -100,7 +107,7 @@ public class Arbol{
     }
 
     public static void main(String[] args) {
-        String expresion ="a=b*5-4+c";
+        String expresion ="a1=b2*5-4+c3";
         Arbol a = new Arbol(expresion);
         System.out.println("");
         a.prefija(a.raiz);
