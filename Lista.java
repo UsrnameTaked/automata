@@ -1,3 +1,5 @@
+import java.util.Formatter;
+
 public class Lista {
     private Nodo inicio;
     private Nodo fin;
@@ -105,10 +107,18 @@ public class Lista {
 
     public void printList() {
         Nodo nodoActual = fin;
+        // Usamos Formatter para imprimir en formato de tabla
+        Formatter formatter = new Formatter(System.out);
+        // Encabezado de la tabla
+        formatter.format("%-8s%-20s%-12s%-15s%-10s%-10s%n", "Línea", "Tipo", "Cadena", "Apariciones", "Valor", "Índice");
         while (nodoActual != null) {
-            System.out.println(nodoActual.i + "        " + nodoActual.t + "        " + nodoActual.cadena + "        " + nodoActual.apariciones + "        " + nodoActual.valor+ "        " + nodoActual.linea );
+            // Imprimir cada fila de la tabla
+            formatter.format("%-8d%-20s%-12s%-15s%-10s%-10d%n", nodoActual.i, nodoActual.t, nodoActual.cadena,
+                    nodoActual.apariciones, nodoActual.valor, nodoActual.linea);
             nodoActual = nodoActual.ant;
         }
+        // Aseguramos que los datos se impriman
+        formatter.flush();
     }
 
     public String toString() {
@@ -153,6 +163,7 @@ public class Lista {
         public String apariciones;//para simbolos
         public Nodo sig;
         public Nodo ant;
+        public String codigo;
         public Nodo(String cadena, String t,String valor, String apariciones, int i, int linea){
             this.cadena = cadena;
             this.t = t;

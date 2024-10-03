@@ -1,11 +1,8 @@
-/*import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;*/
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Lexico {
     Lista errores, simbolos, palabrasR, tokens;
@@ -16,9 +13,11 @@ public class Lexico {
     private final String N = "[0-9]";
     private final String PR = "(programa||print||int)";
     private final String ID = "("+L+")("+N+")";
-    public final String Sep = "[{};()=\\+\\-\\* ]";
+    public final String Sep = "[{};()=\\+\\-\\*/ ]";
     public final String declaracion = "(int "+ID+")";
     public final String asignacion = "("+ID+"=("+N+"))";
+    public final String operadores = "[\\+\\-\\*]";
+    public final String operacion = ID+"="+ID+operadores+ID+";";
     public int linea;
     public Lexico(){
         errores = new Lista();
@@ -41,13 +40,15 @@ public class Lexico {
                     if (!simbolos.contains(cadenas[i])) { // Verificar si no está en la Lista
                         simbolos.add(cadenas[i], "", "", "1", linea);
                     }else{
-                        simbolos.getN(cadenas[i]).apariciones = (Integer.parseInt(simbolos.getN(cadenas[i]).apariciones)+1)+"";
+                        simbolos.getN(cadenas[i]).apariciones = (simbolos.getN(cadenas[i]).apariciones)+", "+linea;
                     }
                     tokens.add(cadenas[i], "ID", "", "", linea);
                 } else {
                             if (cadenas[i].matches(N)) {
                                 if (!simbolos.contains(cadenas[i])) { // Verificar si no está en la Lista
-                                    simbolos.add(cadenas[i], "", "", "", linea);
+                                    simbolos.add(cadenas[i], "", "", linea+"", linea);
+                                }else{
+                                    simbolos.getN(cadenas[i]).apariciones = (simbolos.getN(cadenas[i]).apariciones)+", "+linea;
                                 }
                                 tokens.add(cadenas[i], "Valor", "", "", linea);
                             } else {
@@ -66,8 +67,8 @@ public class Lexico {
                     }
         }
         linea ++;
-        encontrarDA(cadena, simbolos);
-
+        encontrarDA(cadena, simbolos);//una vez esté completo el análisis léxico se realiza un análisis para la búsqueda de asignaciones y declaraciones
+        encontrarO(cadena, simbolos);
         if (e) {
             System.out.println("Cadena no válida");
             return null;
@@ -77,10 +78,10 @@ public class Lexico {
         }
     }
 
-    public void encontrarDA(String cadena, Lista simbolos) {
-        String regex, separacion;
+    public void encontrarDA(String cadena, Lista simbolos) {//pide una cadena a analizar y una lista
+        String regex, separacion;//se usa una expresión regular para encontrar las asignaciones y declaraciones
         for(int i = 0; i<2; i++){
-            if(i == 0){
+            if(i == 0){// primero buscamos si es una declación
                 regex = declaracion;
                 separacion = " ";
             }else{
@@ -90,16 +91,36 @@ public class Lexico {
             pattern = Pattern.compile(regex);
             matcher = pattern.matcher(cadena);
         
-            while (matcher.find()) {
+            while (matcher.find()) {//mientras se hayan encontrado coincidencias
                 String declaracionEncontrada = matcher.group();
-                System.out.println(declaracionEncontrada);
-                String[] sep = declaracionEncontrada.split(separacion);
+                String[] sep = declaracionEncontrada.split(separacion);//se separa la coincidencia encontrada
                 if(i == 0){
-                    simbolos.getN(sep[1]).t = sep[0];
+                    simbolos.getN(sep[1]).t = sep[0];//agrega a la tabla de símbolos dependiendo si era assignación
                 }else{
-                    simbolos.getN(sep[0]).valor = sep[1];
+                    simbolos.getN(sep[0]).valor = sep[1];//o declaración
                 }
             }
+        }
+    }
+
+
+    public void encontrarO(String cadena, Lista simbolos) {//pide una cadena a analizar y una lista
+        String regex, separacion;//se usa una expresión regular para encontrar operaciones
+        regex = operacion;
+        simbolos = this.simbolos;
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(cadena);
+        separacion=";";
+        
+        while (matcher.find()) {//mientras se hayan encontrado coincidencias
+            String declaracionEncontrada = matcher.group();
+            String[] sep = declaracionEncontrada.split(separacion);//se separa la coincidencia encontrada
+            System.out.println(sep[0]);
+            Arbol a = new Arbol(sep[0], simbolos);
+            System.out.println("");
+            a.postfija(a.raiz);
+            System.out.println("");
+            a.verificarTipos(a.raiz);
         }
     }
     
@@ -142,20 +163,18 @@ public class Lexico {
         return tokens;
     }
 
-   public static void main(String args[]){
-         try (BufferedReader br = new BufferedReader(new FileReader("cadenas.txt"))) {//lee el archivo
-            Lexico l = new Lexico();//crea un objeto del analizador lexico
-    
+    public static void main(String args[]){
+        try (BufferedReader br = new BufferedReader(new FileReader("cadenas.txt"))) {//lee el archivo
+            Lexico l = new Lexico();//crea un objeto del analizador sintactico
+            
             String line;//lee una línea
             while ((line = br.readLine()) != null) {//mientras aún haya líneas
                 l.analisisL(line);//realiza un análisis léxico-sintáctico a la cadena recibida
             }
-            Lista tokens = l.getTokens();
-            tokens.printList();
+            l.printT();
         } catch (IOException e) {
             e.printStackTrace();
-        }       
+        }
     }
-    
 
 }

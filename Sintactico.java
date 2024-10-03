@@ -88,19 +88,19 @@ public class Sintactico {
             X.push("S");
             W.add("$", "simbolo", "", "",0);//agregamos el ultimo terminal para que coincida con la pila
             Formatter formatter = new Formatter(writer);//para dar formato a la salida en consola y en archivo
-            Formatter formatterprinter = new Formatter(System.out);
+            //Formatter formatterprinter = new Formatter(System.out);
             formatter.format("%-30s %-80s %-30s %-30s\n", "Pila(X)", "Entrada(a) W$", "M[A,a]", "Acción"); //cabecera de la tabla
-            formatterprinter.format("%-30s %-80s %-30s %-30s\n", "Pila(X)", "Entrada(a) W$", "M[A,a]", "Acción");
+            //formatterprinter.format("%-30s %-80s %-30s %-30s\n", "Pila(X)", "Entrada(a) W$", "M[A,a]", "Acción");
 
             while (!W.isEmpty()) {//un ciclo que se repite mientras la lista no este vacia
                 formatter.format("%-30s %-80s %-30s", X.toString(), W.toString(),//imprime lo que hay en la pila, en la lista
                 "M[" + X.tope.cadena + "," + W.getLast() + "]");//y la comparación que va hacer
-                formatterprinter.format("%-30s %-80s %-30s", X.toString(), W.toString(),
-                "M[" + X.tope.cadena + "," + W.getLast() + "]");
+                //formatterprinter.format("%-30s %-80s %-30s", X.toString(), W.toString(),
+                //"M[" + X.tope.cadena + "," + W.getLast() + "]");
                 
                 if (X.tope.cadena.equals(W.getLast())) {//si lo que hay en la entrada de la lista coincide con lo que hay en la pila
                     formatter.format("%-30s\n", "igual");//imprime que son iguales
-                    formatterprinter.format("%-30s\n", "igual");
+                    //formatterprinter.format("%-30s\n", "igual");
                     //System.out.println(X.tope.cadena+"      "+W.getLast()+"        M[" + X.tope.cadena + "," + W.getLast() + "]         ");
                     X.pop();//realiza un pop
                     W.removeLast();//remueve el ultimo elemento de la lista
@@ -124,7 +124,7 @@ public class Sintactico {
                     } else {//si el siguiente no es un id
                         comp = comp(X.tope.cadena, W.getLast());//realiza la comparación
                         formatter.format("%-30s\n", "Comp: " + comp);
-                        formatterprinter.format("%-30s\n", "Comp: " + comp);
+                        //formatterprinter.format("%-30s\n", "Comp: " + comp);
                         X.pop();//realiza un pop la pila
                         String[] reglas = l.div(comp);//dividimos las cadenas de la pila para invertir las reglas y meterlas a la pila
                         for (int i = reglas.length; i > 0; i--) {
@@ -154,22 +154,4 @@ public class Sintactico {
         return tabla.get(R).get(c);
     }
 
-    public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new FileReader("cadenas.txt"))) {//lee el archivo
-            Lexico l = new Lexico();//crea un objeto del analizador sintactico
-            
-            String line;//lee una línea
-            while ((line = br.readLine()) != null) {//mientras aún haya líneas
-                l.analisisL(line);//realiza un análisis léxico-sintáctico a la cadena recibida
-            }
-            Sintactico s = new Sintactico(l.getTokens());//crea un objeto del analizador sintactico
-            s.analisisS();
-            
-            // Cerrar el PrintWriter al finalizar
-            s.writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
 }
