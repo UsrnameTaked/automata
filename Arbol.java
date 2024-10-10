@@ -58,6 +58,10 @@ public class Arbol{
         }
         if(izq.equals("int") && der.equals("int")){
             raiz.tipo = "int";
+        }else{
+            if(izq.equals("int") && der.equals("float") || izq.equals("float") && der.equals("int")){
+                raiz.tipo = "float";
+            }
         }
         if(simbolos.getN(raiz.cadena) != null){
             simbolos.getN(raiz.cadena).t = raiz.tipo;
