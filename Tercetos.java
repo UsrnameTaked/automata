@@ -11,7 +11,7 @@ public class Tercetos {
     public Tercetos(String cadena) {
         // Dividimos la cadena en palabras usando split (por espacios)
         //System.out.println("Consultamos la cadena "+cadena);
-        Delacarion(cadena.charAt(0));
+        //Delacarion(cadena.charAt(0));
         if(Delacarion(cadena.charAt(0)) == 1){
             this.tipoOperacion = true;
             this.palabras = cadena.split(" ");
@@ -71,6 +71,7 @@ public class Tercetos {
 
                 // Si la palabra actual es un operador
                 if (esOperador(palabra)) {
+                    //System.out.println(String.join(",", palabras));
                     // Verificar si las dos siguientes palabras son operandos
                     String operando1 = palabras[i + 1];
                     String operando2 = palabras[i + 2];
@@ -78,13 +79,17 @@ public class Tercetos {
                     if (esOperando(operando1) && esOperando(operando2)) {
                         // Generar el terceto con el operador y los dos operandos
                         String temp = generarTerceto(palabra, operando1, operando2);
-
+                        //System.out.println(palabras[i] + " " + palabras[i + 1] + " " + palabras[i + 2] + " -> " + temp);
+                        //System.out.println("generando ");
                         // Imprimir el terceto generado
-                        System.out.println("Terceto generado: " + temp);
+                        //System.out.println("Terceto generado: " + temp);
 
                         // Reemplazar en la cadena el operador y los dos operandos por el temporal generado
                         reemplazarPorTemporal(i, temp);
-
+                        //ponemos formato de terceto 
+                        System.out.println("(= "+temp+" "+operando1+")");   
+                        //siguiente operacion de operacion con el simbolo 
+                        System.out.println(imprimirTerceto(palabra, temp, operando2));                     
                         // Reiniciar el ciclo desde el comienzo, ya que la cadena ha cambiado
                         break;
                     }
@@ -92,17 +97,16 @@ public class Tercetos {
             }
         }
         // Imprimir la cadena final
-        System.out.println("Cadena final: " + String.join(" ", palabras));
-        System.out.println(imprimirTerceto(palabras[0], palabras[1], palabras[2]));
+        System.out.println("(" + String.join(" ", palabras) + ")");
+        //System.out.println(imprimirTerceto(palabras[0], palabras[1], palabras[2]));
         }
     }
-
     // Método auxiliar para generar el terceto
     String generarTerceto(String operador, String operando1, String operando2) {
         contTemp++; // Incrementar el contador de temporales
         return "Temp" + contTemp;
     }
-   
+    // Método auxiliar para imprimri un terceto
     String imprimirTerceto(String operador, String operando1, String operando2) {
         return "(" + operador + " " + operando1 + " " + operando2 + ")";
     }
