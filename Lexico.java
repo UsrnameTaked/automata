@@ -144,6 +144,7 @@ public class Lexico {
         System.out.println("\nTabla de errores");
         errores.printList();
         System.out.println("////////////////////////////////////////////");
+    
     }
 
     public String[] div(String cadena){

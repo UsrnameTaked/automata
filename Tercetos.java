@@ -1,13 +1,11 @@
 import java.util.ArrayList;
-
 public class Tercetos {
-
+    ensamblador esamble = new ensamblador();
     String[] operadores = {"+", "-", "*", "/"}; // Operadores válidos
     String[] palabras; // Cadena inicial separada por palabras
     boolean tipoOperacion;
     int contTemp = 0; // Contador de temporales
     ArrayList<String> listaTercetos = new ArrayList<>(); // Almacenar los tercetos generados
-
     public Tercetos(String cadena) {
         // Dividimos la cadena en palabras usando split (por espacios)
         //System.out.println("Consultamos la cadena "+cadena);
@@ -21,7 +19,6 @@ public class Tercetos {
             this.palabras = cadena.split(",");   
         }
     }
-
     // Procedimiento para generar los tercetos recursivamente
     void ProcedimientoPre() {
         //vemos que procedimiento realizamos
@@ -100,6 +97,7 @@ public class Tercetos {
         System.out.println("(" + String.join(" ", palabras) + ")");
         //System.out.println(imprimirTerceto(palabras[0], palabras[1], palabras[2]));
         }
+        esamble.imprimir();
     }
     // Método auxiliar para generar el terceto
     String generarTerceto(String operador, String operando1, String operando2) {
@@ -108,6 +106,9 @@ public class Tercetos {
     }
     // Método auxiliar para imprimri un terceto
     String imprimirTerceto(String operador, String operando1, String operando2) {
+        String Ensamblador = "";
+        Ensamblador = operador + " " + operando1 + " " + operando2;
+        esamble.agregar(Ensamblador);
         return "(" + operador + " " + operando1 + " " + operando2 + ")";
     }
     // Método para verificar si una palabra es un operador
@@ -119,12 +120,10 @@ public class Tercetos {
         }
         return false;
     }
-
     // Método para verificar si una palabra es un operando (letra o número)
     boolean esOperando(String s) {
         return s.matches("[A-Za-z0-9]+"); // Verifica que solo contenga letras o números
     }
-
     // Método auxiliar para verificar si aún hay operadores en la cadena
     boolean contieneOperadores() {
         for (String palabra : palabras) {
@@ -134,7 +133,6 @@ public class Tercetos {
         }
         return false;
     }
-
     // Método para reemplazar el operador y los dos operandos por un temporal
     void reemplazarPorTemporal(int i, String temp) {
         palabras[i] = temp; // Reemplazar el operador con el temporal
@@ -152,7 +150,6 @@ public class Tercetos {
         // Actualizar el arreglo de palabras
         palabras = nuevaCadena.toArray(new String[0]);
     }
-    
     //Metodo para saber si es declaracion o operacion
     int Delacarion(char c){
         if (c != '=') {
