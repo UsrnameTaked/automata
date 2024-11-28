@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 public class Tercetos {
-    ensamblador esamble = new ensamblador();
+    ensamblador OBJEnsamblador = new ensamblador();
     String[] operadores = {"+", "-", "*", "/"}; // Operadores válidos
     String[] palabras; // Cadena inicial separada por palabras
     boolean tipoOperacion;
     int contTemp = 0; // Contador de temporales
     ArrayList<String> listaTercetos = new ArrayList<>(); // Almacenar los tercetos generados
+    String Ensamblador = "";
+    ArrayList<String> Ensambladores = new ArrayList<>();
     public Tercetos(String cadena) {
         // Dividimos la cadena en palabras usando split (por espacios)
         //System.out.println("Consultamos la cadena "+cadena);
@@ -85,19 +87,23 @@ public class Tercetos {
                         reemplazarPorTemporal(i, temp);
                         //ponemos formato de terceto 
                         System.out.println("(= "+temp+" "+operando1+")");   
+                        OBJEnsamblador.agregar("= "+temp+" "+operando1+"");
                         //siguiente operacion de operacion con el simbolo 
-                        System.out.println(imprimirTerceto(palabra, temp, operando2));                     
+                        System.out.println(imprimirTerceto(palabra, temp, operando2));     
+                        
                         // Reiniciar el ciclo desde el comienzo, ya que la cadena ha cambiado
+                        Ensambladores.add("= "+temp+" "+operando1+"");
                         break;
                     }
                 }
+                
             }
         }
         // Imprimir la cadena final
         System.out.println("(" + String.join(" ", palabras) + ")");
+        OBJEnsamblador.agregar("" + String.join(" ", palabras) + "");
         //System.out.println(imprimirTerceto(palabras[0], palabras[1], palabras[2]));
         }
-        esamble.imprimir();
     }
     // Método auxiliar para generar el terceto
     String generarTerceto(String operador, String operando1, String operando2) {
@@ -106,10 +112,13 @@ public class Tercetos {
     }
     // Método auxiliar para imprimri un terceto
     String imprimirTerceto(String operador, String operando1, String operando2) {
-        String Ensamblador = "";
-        Ensamblador = operador + " " + operando1 + " " + operando2;
-        esamble.agregar(Ensamblador);
-        return "(" + operador + " " + operando1 + " " + operando2 + ")";
+        OBJEnsamblador.agregar(""+operador+" "+operando1+" "+operando2+"");
+       return "(" + operador + " " + operando1 + " " + operando2 + ")";
+    }
+    public void imprimir(){
+        for (String s : Ensambladores) {
+            System.out.println(s);
+        }
     }
     // Método para verificar si una palabra es un operador
     boolean esOperador(String s) {
@@ -161,3 +170,4 @@ public class Tercetos {
         }
     }
 }
+
