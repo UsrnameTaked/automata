@@ -8,6 +8,7 @@ public class Tercetos {
     ArrayList<String> listaTercetos = new ArrayList<>(); // Almacenar los tercetos generados
     String Ensamblador = "";
     ArrayList<String> Ensambladores = new ArrayList<>();
+    
     public Tercetos(String cadena) {
         // Dividimos la cadena en palabras usando split (por espacios)
         //System.out.println("Consultamos la cadena "+cadena);

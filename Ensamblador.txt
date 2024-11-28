@@ -1,0 +1,10 @@
+MOV R1 a1
+MOV R1 b2
+MOV R1 c3
+MOV a1 8
+MOV b2 9
+MOV Temp1 n1
+ADD Temp1 b2
+MOV Temp2 a1
+ADD Temp2 Temp1
+MOV c3 Temp2

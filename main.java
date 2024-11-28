@@ -1,8 +1,19 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class main {
+    ArrayList<String> Ensamblador = new ArrayList<>();
+    public void main(ArrayList<String> Lista) {
+        guardar(Lista);
+        guardar2("Ensamblador.txt");
+    }
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new FileReader("cadenas.txt"))) {// lee el archivo
              Lexico l = new Lexico();// crea un objeto del analizador sintactico
@@ -31,6 +42,51 @@ public class main {
             
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void guardar(ArrayList<String> lista) {
+       // Ruta del archivo
+        String archivo = "Ensamblador.txt";
+
+        // Crear un Set para eliminar duplicados
+        Set<String> lineasUnicas = new HashSet<>(lista);
+
+        // Intentamos escribir en el archivo en modo apéndice
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true))) {
+            for (String linea : lineasUnicas) {
+                writer.write(linea);
+                writer.newLine();
+            }
+            System.out.println("Datos únicos agregados al archivo: " + archivo);
+        } catch (IOException e) {
+            System.err.println("Error al guardar el archivo: " + e.getMessage());
+        }
+    }
+    public static void guardar2(String archivo) {
+        // Usamos un Set para almacenar las líneas únicas
+        Set<String> lineasUnicas = new LinkedHashSet<>();
+
+        // Leer el archivo y almacenar las líneas únicas en el Set
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                lineasUnicas.add(linea.trim()); // Trim para evitar duplicados por espacios en blanco
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+            return;
+        }
+
+        // Sobrescribir el archivo con las líneas únicas
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+            for (String linea : lineasUnicas) {
+                writer.write(linea);
+                writer.newLine();
+            }
+            System.out.println("Archivo actualizado sin duplicados.");
+        } catch (IOException e) {
+            System.err.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
 }

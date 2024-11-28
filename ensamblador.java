@@ -5,6 +5,7 @@ public class ensamblador {
     String CadenaTemporal = "";
     int contRegistros = 1;
     ArrayList<String> CadenasEnsamblador = new ArrayList<>();
+    main m = new main();
     public void agregar(String s){
         cadena = s;
         modificarTerceto(s);
@@ -56,9 +57,9 @@ public class ensamblador {
         System.out.println("*********** ENSAMBLADOR ***********");
         for (String s : CadenasEnsamblador) {
             System.out.println(s);
+            m.main(CadenasEnsamblador);
         }
         System.out.println("***********************************");
     }
     
-
 }
